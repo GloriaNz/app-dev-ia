@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+
+{% block title %}Pass Premium - Formation Développeur IA & Data{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- PAYWALL HERO BANNER -->
+    <div class="text-center max-w-3xl mx-auto mb-12">
+        <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs font-bold mb-4">
+            <i class="fa-solid fa-crown text-amber-400"></i>
+            <span>DÉBLOQUER L'ACCÈS COMPLET À LA FORMATION</span>
+        </div>
+        
+        <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
+            Passez au niveau supérieur avec le <span class="bg-gradient-to-r from-amber-400 via-orange-400 to-amber-200 bg-clip-text text-transparent">Pass Premium</span>
+        </h1>
+        <p class="mt-4 text-slate-300 text-base leading-relaxed">
+            Le Module 1 est gratuit. Débloquez instantanément l'accès illimité aux <strong>Modules 2, 3 et 4</strong> pour maîtriser la chaîne complète de l'Intelligence Artificielle.
+        </p>
+    </div>
+
+    <!-- INCLUDED MODULES HIGHLIGHT -->
+    <div class="grid md:grid-cols-3 gap-6 mb-12">
+        <!-- MODULE 2 -->
+        <div class="p-6 rounded-3xl bg-slate-900/90 border border-slate-800 shadow-xl relative overflow-hidden flex flex-col justify-between">
+            <div class="absolute -top-10 -right-10 w-24 h-24 bg-brand-500/10 rounded-full blur-xl pointer-events-none"></div>
+            <div>
+                <div class="w-10 h-10 rounded-xl bg-brand-500/20 text-brand-400 border border-brand-500/30 flex items-center justify-center text-lg mb-4">
+                    <i class="fa-solid fa-database"></i>
+                </div>
+                <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Module 2</span>
+                <h3 class="text-base font-bold text-white mb-2">Data Engineering & Vector DBs</h3>
+                <p class="text-xs text-slate-400 leading-relaxed mb-4">Scraping, nettoyage Pandas/Polars, indexation dans ChromaDB/FAISS pour la RAG.</p>
+            </div>
+            <span class="text-xs font-semibold text-amber-400 flex items-center space-x-1">
+                <i class="fa-solid fa-lock me-1"></i> Inclus dans le Pass
+            </span>
+        </div>
+
+        <!-- MODULE 3 -->
+        <div class="p-6 rounded-3xl bg-slate-900/90 border border-slate-800 shadow-xl relative overflow-hidden flex flex-col justify-between">
+            <div class="absolute -top-10 -right-10 w-24 h-24 bg-violet-500/10 rounded-full blur-xl pointer-events-none"></div>
+            <div>
+                <div class="w-10 h-10 rounded-xl bg-violet-500/20 text-violet-400 border border-violet-500/30 flex items-center justify-center text-lg mb-4">
+                    <i class="fa-solid fa-brain"></i>
+                </div>
+                <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Module 3</span>
+                <h3 class="text-base font-bold text-white mb-2">Fine-Tuning LLMs Open Source</h3>
+                <p class="text-xs text-slate-400 leading-relaxed mb-4">Adaptation de Llama 3/Mistral avec QLoRA, HuggingFace Transformers & PyTorch.</p>
+            </div>
+            <span class="text-xs font-semibold text-amber-400 flex items-center space-x-1">
+                <i class="fa-solid fa-lock me-1"></i> Inclus dans le Pass
+            </span>
+        </div>
+
+        <!-- MODULE 4 -->
+        <div class="p-6 rounded-3xl bg-slate-900/90 border border-slate-800 shadow-xl relative overflow-hidden flex flex-col justify-between">
+            <div class="absolute -top-10 -right-10 w-24 h-24 bg-emerald-500/10 rounded-full blur-xl pointer-events-none"></div>
+            <div>
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-lg mb-4">
+                    <i class="fa-solid fa-rocket"></i>
+                </div>
+                <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Module 4</span>
+                <h3 class="text-base font-bold text-white mb-2">Industrialisation MLOps & Cloud</h3>
+                <p class="text-xs text-slate-400 leading-relaxed mb-4">Docker, CI/CD GitHub Actions, Scaling d'inférence et Observabilité IA.</p>
+            </div>
+            <span class="text-xs font-semibold text-amber-400 flex items-center space-x-1">
+                <i class="fa-solid fa-lock me-1"></i> Inclus dans le Pass
+            </span>
+        </div>
+    </div>
+
+    <!-- PAYMENT CARD / SIMULATION CARD -->
+    <div class="bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 border-2 border-amber-500/40 rounded-3xl p-8 sm:p-10 shadow-2xl relative overflow-hidden max-w-2xl mx-auto">
+        <div class="absolute -top-24 -left-24 w-64 h-64 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 border-b border-slate-800">
+            <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Offre Spéciale Lancement</span>
+                <h3 class="text-2xl font-extrabold text-white">Pass Premium Accès À Vie</h3>
+            </div>
+            <div class="text-right">
+                <span class="text-4xl font-extrabold text-white">499€</span>
+                <span class="text-xs text-slate-400 block font-normal">Paiement unique (Simulation)</span>
+            </div>
+        </div>
+
+        <div class="py-6 space-y-3">
+            <div class="flex items-center space-x-3 text-xs text-slate-300">
+                <i class="fa-solid fa-circle-check text-amber-400 text-sm"></i>
+                <span>Accès complet et illimité aux 4 Modules de la formation</span>
+            </div>
+            <div class="flex items-center space-x-3 text-xs text-slate-300">
+                <i class="fa-solid fa-circle-check text-amber-400 text-sm"></i>
+                <span>Supports de cours PDF et code source des projets téléchargeables</span>
+            </div>
+            <div class="flex items-center space-x-3 text-xs text-slate-300">
+                <i class="fa-solid fa-circle-check text-amber-400 text-sm"></i>
+                <span>Projets pratiques : RAG, Fine-Tuning QLoRA & Déploiement MLOps</span>
+            </div>
+            <div class="flex items-center space-x-3 text-xs text-slate-300">
+                <i class="fa-solid fa-circle-check text-amber-400 text-sm"></i>
+                <span>Certificat de réussite "Développeur IA & Data"</span>
+            </div>
+        </div>
+
+        <!-- MOCK PAYMENT TRIGGER BUTTON -->
+        <div class="pt-4">
+            <button id="pay-button" 
+                    onclick="triggerMockPayment()" 
+                    class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-amber-500 via-orange-500 to-amber-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-extrabold text-sm shadow-xl shadow-amber-500/25 transition-all flex items-center justify-center space-x-2">
+                <i id="pay-icon" class="fa-solid fa-bolt text-lg"></i>
+                <span id="pay-text">Simuler le Paiement & Débloquer la Formation</span>
+            </button>
+            <p class="text-[11px] text-slate-500 text-center mt-3">
+                <i class="fa-solid fa-shield-halved me-1"></i> Mode Simulation Webhook Active : Aucune carte bancaire requise.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function triggerMockPayment() {
+    const btn = document.getElementById('pay-button');
+    const payText = document.getElementById('pay-text');
+    const payIcon = document.getElementById('pay-icon');
+
+    btn.disabled = true;
+    payText.innerText = "Validation du paiement Stripe en cours...";
+    payIcon.className = "fa-solid fa-spinner animate-spin text-lg";
+
+    fetch('/api/pay-mock', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            payText.innerText = "Paiement réussi ! Déblocage de la formation...";
+            payIcon.className = "fa-solid fa-circle-check text-emerald-950 text-lg";
+            setTimeout(() => {
+                window.location.href = data.redirect_url;
+            }, 1200);
+        }
+    })
+    .catch(error => {
+        btn.disabled = false;
+        payText.innerText = "Erreur, réessayer";
+        payIcon.className = "fa-solid fa-triangle-exclamation text-lg";
+        console.error('Erreur de paiement:', error);
+    });
+}
+</script>
+{% endblock %}

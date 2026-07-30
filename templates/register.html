@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}Inscription - Formation Développeur IA & Data{% endblock %}
+
+{% block content %}
+<div class="min-h-[calc(100vh-12rem)] flex items-center justify-center px-4 py-12">
+    <div class="w-full max-w-md">
+        <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-8 shadow-2xl backdrop-blur-xl relative overflow-hidden">
+            <div class="absolute -top-12 -left-12 w-32 h-32 bg-emerald-500/20 rounded-full blur-2xl pointer-events-none"></div>
+
+            <div class="text-center mb-8">
+                <div class="inline-flex w-14 h-14 rounded-2xl bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 items-center justify-center mb-4 text-2xl">
+                    <i class="fa-solid fa-user-plus"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-white tracking-tight">Créer un Compte Gratuit</h2>
+                <p class="text-xs text-slate-400 mt-1">Accès immédiat et gratuit au Module 1 : Développer une application web</p>
+            </div>
+
+            <!-- REGISTER FORM -->
+            <form action="{{ url_for('register') }}" method="POST" class="space-y-4">
+                <div>
+                    <label for="username" class="block text-xs font-semibold text-slate-300 mb-1.5 uppercase tracking-wider">Nom d'utilisateur</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <input type="text" id="username" name="username" required placeholder="AlexDev" 
+                            class="w-full pl-10 pr-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-white text-sm placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="email" class="block text-xs font-semibold text-slate-300 mb-1.5 uppercase tracking-wider">Adresse Email</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <input type="email" id="email" name="email" required placeholder="alex@domaine.fr" 
+                            class="w-full pl-10 pr-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-white text-sm placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="password" class="block text-xs font-semibold text-slate-300 mb-1.5 uppercase tracking-wider">Mot de passe</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                            <i class="fa-solid fa-key"></i>
+                        </div>
+                        <input type="password" id="password" name="password" required placeholder="••••••••" 
+                            class="w-full pl-10 pr-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-white text-sm placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all">
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-sm shadow-lg shadow-emerald-500/25 transition-all flex items-center justify-center space-x-2">
+                        <span>Créer mon compte et démarrer</span>
+                        <i class="fa-solid fa-rocket"></i>
+                    </button>
+                </div>
+            </form>
+
+            <div class="mt-6 text-center text-xs text-slate-400">
+                Vous possédez déjà un compte ? 
+                <a href="{{ url_for('login') }}" class="font-bold text-brand-400 hover:underline">Se connecter</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}Connexion - Formation Développeur IA & Data{% endblock %}
+
+{% block content %}
+<div class="min-h-[calc(100vh-12rem)] flex items-center justify-center px-4 py-12">
+    <div class="w-full max-w-md">
+        <!-- CARD -->
+        <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-8 shadow-2xl backdrop-blur-xl relative overflow-hidden">
+            <div class="absolute -top-12 -right-12 w-32 h-32 bg-brand-500/20 rounded-full blur-2xl pointer-events-none"></div>
+
+            <div class="text-center mb-8">
+                <div class="inline-flex w-14 h-14 rounded-2xl bg-brand-600/20 text-brand-400 border border-brand-500/30 items-center justify-center mb-4 text-2xl">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-white tracking-tight">Connexion à votre Espace</h2>
+                <p class="text-xs text-slate-400 mt-1">Accédez à vos modules de cours "Développeur IA & Data"</p>
+            </div>
+
+            <!-- DEMO LOGIN QUICK ACTION BUTTONS -->
+            <div class="mb-6 p-4 rounded-xl bg-slate-950/70 border border-slate-800 text-xs">
+                <div class="font-semibold text-brand-300 mb-2 flex items-center space-x-1">
+                    <i class="fa-solid fa-key"></i>
+                    <span>Comptes de démonstration rapide :</span>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <button type="button" onclick="fillCredentials('etudiant@formation-ia.fr', 'Etudiant2026!')" class="px-2 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium transition-colors text-left truncate">
+                        <i class="fa-solid fa-user text-emerald-400 me-1"></i> Étudiant (Free)
+                    </button>
+                    <button type="button" onclick="fillCredentials('admin@formation-ia.fr', 'Admin2026!')" class="px-2 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium transition-colors text-left truncate">
+                        <i class="fa-solid fa-shield-halved text-amber-400 me-1"></i> Admin (Premium)
+                    </button>
+                </div>
+            </div>
+
+            <!-- LOGIN FORM -->
+            <form action="{{ url_for('login') }}" method="POST" class="space-y-5">
+                <div>
+                    <label for="email" class="block text-xs font-semibold text-slate-300 mb-1.5 uppercase tracking-wider">Adresse Email</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <input type="email" id="email" name="email" required placeholder="nom@domaine.fr" 
+                            class="w-full pl-10 pr-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-white text-sm placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="password" class="block text-xs font-semibold text-slate-300 mb-1.5 uppercase tracking-wider">Mot de passe</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+                        <input type="password" id="password" name="password" required placeholder="••••••••" 
+                            class="w-full pl-10 pr-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-white text-sm placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all">
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-brand-600 to-violet-600 hover:from-brand-500 hover:to-violet-500 text-white font-bold text-sm shadow-lg shadow-brand-500/25 transition-all flex items-center justify-center space-x-2">
+                    <span>Se Connecter</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+
+            <div class="mt-6 text-center text-xs text-slate-400">
+                Vous n'avez pas encore de compte ? 
+                <a href="{{ url_for('register') }}" class="font-bold text-brand-400 hover:underline">S'inscrire gratuitement</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function fillCredentials(email, pass) {
+        document.getElementById('email').value = email;
+        document.getElementById('password').value = pass;
+    }
+</script>
+{% endblock %}

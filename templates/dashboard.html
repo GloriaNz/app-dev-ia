@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard Étudiant - Formation Développeur IA & Data{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <!-- WELCOME & STATS OVERVIEW HEADER -->
+    <div class="p-8 rounded-3xl bg-gradient-to-r from-slate-900 via-slate-900/90 to-brand-950/60 border border-slate-800 shadow-2xl relative overflow-hidden mb-10">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 relative z-10">
+            <div>
+                <div class="flex items-center space-x-3 mb-2">
+                    <span class="text-xs font-bold uppercase tracking-wider text-brand-400">Espace d'Apprentissage</span>
+                    {% if current_user.has_premium_access %}
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center space-x-1">
+                            <i class="fa-solid fa-crown text-xs"></i>
+                            <span>ACCÈS PREMIUM ILLIMITÉ</span>
+                        </span>
+                    {% else %}
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-slate-800 text-slate-300 border border-slate-700 flex items-center space-x-1">
+                            <i class="fa-solid fa-gift text-emerald-400 text-xs"></i>
+                            <span>FREEMIUM (Module 1 Gratuit)</span>
+                        </span>
+                    {% endif %}
+                </div>
+
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-white">
+                    Bonjour, {{ current_user.username }} ! 👋
+                </h1>
+                <p class="text-slate-300 text-sm mt-1">Bienvenue sur le tableau de bord de votre formation "Développeur IA & Data".</p>
+            </div>
+
+            <!-- OVERALL PROGRESS CARD -->
+            <div class="w-full lg:w-80 bg-slate-950/80 p-5 rounded-2xl border border-slate-800">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-semibold text-slate-300">Progression Globale</span>
+                    <span class="text-base font-extrabold text-brand-400" id="overall-progress-text">{{ overall_progress }}%</span>
+                </div>
+                <div class="w-full bg-slate-800 rounded-full h-3 overflow-hidden p-0.5">
+                    <div id="overall-progress-bar" class="bg-gradient-to-r from-brand-500 to-emerald-400 h-full rounded-full transition-all duration-500" style="width: {{ overall_progress }}%"></div>
+                </div>
+                <div class="text-[11px] text-slate-500 mt-2 text-right">
+                    Formation certifiante Développeur IA
+                </div>
+            </div>
+        </div>
+
+        {% if not current_user.has_premium_access %}
+            <!-- BANNER INVITATION A L'ACHAT PREMIUM -->
+            <div class="mt-6 pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 bg-gradient-to-r from-amber-500/10 to-orange-500/10 -mx-8 -mb-8 px-8 py-4 border-b border-amber-500/20">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-lock-open text-lg"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold text-white">Débloquez les Modules 2, 3 et 4</h4>
+                        <p class="text-xs text-slate-300">Accédez au Data Engineering, Fine-Tuning de LLMs et à l'Industrialisation MLOps.</p>
+                    </div>
+                </div>
+                <a href="{{ url_for('paywall') }}" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-extrabold text-xs shadow-lg shadow-amber-500/20 transition-all flex items-center space-x-1.5 whitespace-nowrap">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>Activer le Pass Premium (Simulation Instantanée)</span>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- MODULES & LESSONS GRID -->
+    <h2 class="text-2xl font-bold text-white mb-6 flex items-center space-x-2">
+        <i class="fa-solid fa-book-bookmark text-brand-500"></i>
+        <span>Vos Modules de Cours</span>
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {% for item in module_data %}
+            {% set m = item.module %}
+            <div class="rounded-3xl p-6 bg-slate-900/90 border transition-all duration-300 flex flex-col justify-between shadow-xl relative overflow-hidden
+                {% if item.is_accessible %} border-slate-800 hover:border-slate-700 {% else %} border-slate-800/60 opacity-90 bg-slate-950/40 {% endif %}">
+                
+                <div>
+                    <!-- MODULE HEADER -->
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl
+                                {% if item.is_accessible %} bg-brand-500/10 text-brand-400 border border-brand-500/20 {% else %} bg-slate-800 text-slate-500 border border-slate-700 {% endif %}">
+                                <i class="fa-solid {{ m.icon }}"></i>
+                            </div>
+                            <div>
+                                <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Module {{ m.order }}</span>
+                                <h3 class="text-lg font-bold text-white leading-snug">{{ m.title }}</h3>
+                            </div>
+                        </div>
+
+                        {% if m.is_free %}
+                            <span class="px-2.5 py-1 rounded-full text-[11px] font-extrabold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 whitespace-nowrap">
+                                GRATUIT
+                            </span>
+                        {% elif current_user.has_premium_access %}
+                            <span class="px-2.5 py-1 rounded-full text-[11px] font-extrabold bg-amber-500/20 text-amber-400 border border-amber-500/30 whitespace-nowrap">
+                                <i class="fa-solid fa-crown text-xs me-1"></i> PREMIUM
+                            </span>
+                        {% else %}
+                            <span class="px-2.5 py-1 rounded-full text-[11px] font-extrabold bg-slate-800 text-slate-400 border border-slate-700 whitespace-nowrap flex items-center space-x-1">
+                                <i class="fa-solid fa-lock text-xs"></i>
+                                <span>VERROUILLÉ</span>
+                            </span>
+                        {% endif %}
+                    </div>
+
+                    <p class="text-xs text-slate-400 leading-relaxed mb-6">{{ m.description }}</p>
+
+                    <!-- PROGRESS BAR FOR MODULE -->
+                    {% if item.is_accessible %}
+                        <div class="mb-6">
+                            <div class="flex items-center justify-between text-xs mb-1">
+                                <span class="text-slate-400">Progression du module</span>
+                                <span class="font-bold text-brand-400">{{ item.progress_pct }}%</span>
+                            </div>
+                            <div class="w-full bg-slate-800 rounded-full h-2">
+                                <div class="bg-brand-500 h-2 rounded-full transition-all duration-300" style="width: {{ item.progress_pct }}%"></div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <!-- LESSON LIST -->
+                    <div class="space-y-3 mb-6">
+                        <h4 class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Leçons du module :</h4>
+                        {% for lesson in m.lessons %}
+                            {% set completed = current_user.has_completed_lesson(lesson.id) %}
+                            
+                            {% if item.is_accessible %}
+                                <a href="{{ url_for('view_lesson', lesson_id=lesson.id) }}" 
+                                   class="group flex items-center justify-between p-3 rounded-xl bg-slate-950/60 border border-slate-800/80 hover:border-brand-500/50 hover:bg-slate-800/50 transition-all">
+                                    <div class="flex items-center space-x-3 truncate">
+                                        <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs flex-shrink-0
+                                            {% if completed %} bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 {% else %} bg-slate-800 text-slate-400 {% endif %}">
+                                            {% if completed %}
+                                                <i class="fa-solid fa-check text-[10px]"></i>
+                                            {% else %}
+                                                <i class="fa-solid fa-play text-[9px] ms-0.5"></i>
+                                            {% endif %}
+                                        </div>
+                                        <span class="text-xs text-slate-200 group-hover:text-white font-medium truncate">{{ lesson.title }}</span>
+                                    </div>
+                                    <span class="text-[10px] text-slate-500 ml-2 whitespace-nowrap">{{ lesson.duration_minutes }} min</span>
+                                </a>
+                            {% else %}
+                                <div class="flex items-center justify-between p-3 rounded-xl bg-slate-950/30 border border-slate-800/40 text-slate-600">
+                                    <div class="flex items-center space-x-3 truncate">
+                                        <i class="fa-solid fa-lock text-xs text-slate-600 me-1"></i>
+                                        <span class="text-xs font-medium truncate">{{ lesson.title }}</span>
+                                    </div>
+                                    <span class="text-[10px] text-slate-600">{{ lesson.duration_minutes }} min</span>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- MODULE FOOTER ACTION -->
+                <div class="pt-4 border-t border-slate-800/60 flex items-center justify-between">
+                    {% if item.is_accessible %}
+                        {% set first_lesson = m.lessons[0] %}
+                        <a href="{{ url_for('view_lesson', lesson_id=first_lesson.id) }}" 
+                           class="w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-brand-600 text-white text-xs font-bold transition-all text-center flex items-center justify-center space-x-2">
+                            <span>Continuer le Module</span>
+                            <i class="fa-solid fa-circle-play"></i>
+                        </a>
+                    {% else %}
+                        <a href="{{ url_for('paywall') }}" 
+                           class="w-full py-2.5 px-4 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-400 text-xs font-bold transition-all text-center flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-crown"></i>
+                            <span>Débloquer avec le Pass Premium</span>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
